@@ -55,9 +55,15 @@ public class HomePage {
 	//clicking "not now" in the popup. xpath is taken from the properties file.
 	public void popup() throws IOException
 	{
-		WebElement ele = driver.findElement(By.xpath(prop.getProperty("notnow")));
+		List<WebElement> ele = driver.findElements(By.xpath(prop.getProperty("notnow")));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		ele.click();
+		if(ele.size()!=0) {
+			for(WebElement w:ele)
+				w.click();
+
+		}
+		//condition to be added when popup  not found
+		
 	}
 	
 	//clicking the signin button. xpath is taken from the properties file.

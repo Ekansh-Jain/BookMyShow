@@ -78,24 +78,6 @@ public class TestCases {
 	}
 	
 	@Test(priority=2,groups="Smoke")
-	public void Test_City_Is_Selected_Correctly() throws IOException, Exception
-	{
-		
-		this.objHomePage = new HomePage(driver);
-		
-		try {
-			//calling the selectarea() method in HomePage class
-			objHomePage.selectArea("Chennai");
-			
-		
-		}
-		catch(IOException e) {
-			System.out.print("T3 Failed");
-		}
-		
-	}
-	
-	@Test(priority=3,groups="Smoke")
 	public void Test_Popup_Is_Ignored() throws IOException, InterruptedException, Exception
 	{
 		
@@ -112,6 +94,26 @@ public class TestCases {
 		}
 	
 	}
+	
+	@Test(priority=3,groups="Smoke")
+	public void Test_City_Is_Selected_Correctly() throws IOException, Exception
+	{
+		
+		this.objHomePage = new HomePage(driver);
+		
+		try {
+			//calling the selectarea() method in HomePage class
+			objHomePage.selectArea("Chennai");
+			
+		
+		}
+		catch(IOException e) {
+			//
+		}
+		
+	}
+	
+	
 	
 	
 	@AfterClass
