@@ -3,13 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.bookmyshow.tests.TestCases">
+      <class name="com.bookmyshow.tests.SigninWindowTests">
         <methods>
-          <include name="Test_City_Is_Selected_Correctly"/>
+          <include name="Test_Invalid_Password"/>
+          <include name="Test_Blank_Password"/>
+          <include name="Test_Signing_In_Appears_Correctly"/>
+          <include name="Test_Invalid_UserName"/>
           <include name="setup"/>
-          <include name="exit"/>
+          <include name="close"/>
+          <include name="Test_Blank_UserName"/>
         </methods>
-      </class> <!-- com.bookmyshow.tests.TestCases -->
+      </class> <!-- com.bookmyshow.tests.SigninWindowTests -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

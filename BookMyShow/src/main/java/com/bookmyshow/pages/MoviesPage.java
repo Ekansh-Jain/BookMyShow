@@ -38,6 +38,8 @@ public class MoviesPage {
 		
 		
 		//clicking on coming soon
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0,200)");
 		element = driver.findElement(By.xpath(prop.getProperty("exploreupcoming")));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		element.click();

@@ -4,62 +4,41 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
 import com.bookmyshow.base.BaseUI;
 import com.bookmyshow.pages.HomePage;
-import com.bookmyshow.pages.MoviesPage;
-import com.bookmyshow.pages.SportsPage;
 
 
 
-
-
-
-public class TestCases {
+public class HomePageTests {
 	
 	ActualValues objmainpage;
 	HomePage objHomePage;
-	SportsPage objSportsPage;
-	MoviesPage objMoviesPage;
 	//driver initialization
 	public static WebDriver driver;
 	
-	@BeforeClass
+
+	@BeforeTest
 	public void setup()throws IOException {
 		System.out.println("********************************************************************");
-		System.out.println("BOOKMYSHOW AUTOMATION");
+		System.out.println("TESTS FOR HOME PAGE");
 		System.out.println("********************************************************************");
+		driver=BaseUI.invokeBrowser();
+		driver.get(BaseUI.setUrl());
 	}
 	
-
-	@Test(priority=0,groups="Smoke")
+	@Test(groups="Smoke")
 	public void Test_Browser_And_URL_Invoked_Correctly() throws NullPointerException, Exception {
 		
-		try {
-			
-			//invoke browser
-			
-			driver=BaseUI.invokeBrowser();
-			
-			//launching the site
-			driver.get(BaseUI.setUrl());
-			
-			
-			//maximize the browser window
-			driver.manage().window().maximize();
-			
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+		Assert.assertTrue(driver.getTitle().contains("BookMyShow"));		
 	}
 	
 	
-	@Test(priority=1,groups="Regression")
+	@Test(dependsOnMethods="Test_Browser_And_URL_Invoked_Correctly",groups="Regression")
 	public void Test_MainPage_Title_Matches_Correctly() throws IOException, Exception
 	{
 		//to check whether the expected page and actual page are same,
@@ -71,31 +50,27 @@ public class TestCases {
 		//storing the title in a string
 		String pagetitle = objmainpage.getPageTitle();
 		
-		Thread.sleep(3000);
+	
 			
 		//comparing the actual value with the expected value
 		Assert.assertTrue(pagetitle.contains(pagetitle));
 	}
 	
-	@Test(priority=2,groups="Smoke")
+	@Test(dependsOnMethods="Test_MainPage_Title_Matches_Correctly",groups="Smoke")
 	public void Test_Popup_Is_Ignored() throws IOException, InterruptedException, Exception
 	{
 		
 		this.objHomePage = new HomePage(driver);
 		
-		try {
+		
 			//calling the popup() method in HomePage class
-			objHomePage.popup();
+		objHomePage.popup();
 			
-		}
-		catch (IOException e)
-		{
-			
-		}
+		
 	
 	}
 	
-	@Test(priority=3,groups="Smoke")
+	@Test(dependsOnMethods="Test_Popup_Is_Ignored",groups="Smoke")
 	public void Test_City_Is_Selected_Correctly() throws IOException, Exception
 	{
 		
@@ -113,19 +88,50 @@ public class TestCases {
 		
 	}
 	
-	
-	
-	
-	@AfterClass
-	public void exit() {
+	@Test(dependsOnMethods="Test_City_Is_Selected_Correctly",groups="Smoke")
+	public void Test_Signin_Button_Is_clicked() throws IOException, InterruptedException, Exception
+	{
+		
+		
 		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			//trace the exception
-			e.printStackTrace();
+			this.objHomePage = new HomePage(driver);
+			
+			//calling the signinButton() method in HomePage class
+			objHomePage.signinButton();
+			
+			
 		}
-		driver.quit();
+		catch(IOException e)
+		{
+			
+		}
 	}
 	
+	@Test(dependsOnMethods="Test_Signin_Button_Is_clicked",groups="Smoke")
+	public void Test_Continue_Via_Google_Button_Is_Clicked() throws IOException, Exception
+	{
+		
+		
+		
+		this.objHomePage = new HomePage(driver);
+		
+		try {
+			
+			//calling the selectContinueViaGoogle() method in HomePage class
+			objHomePage.selectContinueViaGoogle();
+			
+			
+			
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
 	
+	@AfterTest
+	public void close() {
+		driver.close();
+	}
+		
 }

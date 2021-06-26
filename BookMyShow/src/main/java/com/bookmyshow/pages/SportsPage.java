@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,6 +44,8 @@ public class SportsPage {
 	
 	//select minimum range from the dropdown box. the required xpath is taken from the properties file.
 	public void clickMinimumRange() throws IOException {
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0,400)");
 		WebElement element = driver.findElement(By.xpath(prop.getProperty("min")));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		element.click();
