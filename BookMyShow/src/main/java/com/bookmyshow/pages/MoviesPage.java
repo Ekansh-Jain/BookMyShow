@@ -94,19 +94,5 @@ public class MoviesPage {
 		System.out.println("********************************************************************");
 	}
 	
-	/*
-	public static void main(String args[]) throws IOException, InterruptedException {
-		System.setProperty("webdriver.edge.driver","D:\\JAVA\\Java Programs\\Deleting Skills Set\\Drivers\\msedgedriver.exe");
-		WebDriver driver=new EdgeDriver();
-		driver.get("https://bookmyshow.com");
-		HomePage h=new HomePage(driver);
-		h.selectArea("Chennai");
-		MoviesPage m=new MoviesPage(driver);
-		m.navigateToMoviesPage_and_Click_Movies();
-		System.out.println(m.checkMoviesAreDisplayed());
-		System.out.println(m.extractLanguage());
-		driver.quit();
-	}
-	*/
 	
 }

@@ -75,22 +75,4 @@ public class SportsPage {
 		
 	}
 	
-	/*
-	public static void main(String args[]) throws IOException, InterruptedException {
-		System.setProperty("webdriver.edge.driver","D:\\JAVA\\Java Programs\\Deleting Skills Set\\Drivers\\msedgedriver.exe");
-		WebDriver driver=new EdgeDriver();
-		driver.get("https://bookmyshow.com");
-		HomePage h=new HomePage(driver);
-		h.selectArea("Chennai");
-		SportsPage s=new SportsPage(driver);
-		s.click_Sports();
-		s.selectWeekend();
-		System.out.println(s.gettitle()+"1");
-		s.clickPriceRange();
-		System.out.println(s.gettitle()+"2");
-		s.clickMinimumRange();
-		System.out.println(s.gettitle()+"3");
-		driver.quit();
-	}
-	*/
 }
