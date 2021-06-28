@@ -21,9 +21,13 @@ public class DriverSetup {
 		System.setProperty("webdriver.chrome.driver", userDir
 				+ BaseUI.prop.getProperty("chromeDriver"));
 		ChromeOptions co = new ChromeOptions();
+		co.addArguments("--disable-web-security","allow-running-insecure-content");
+		
 		co.addArguments("--disable-infobars");
 		//co.addArguments("--disable-notifications");
 		co.addArguments("--disable-gpu");
+		 co.addArguments("--disable-web-security");
+        co.addArguments("--allow-running-insecure-content");
 		co.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.DISMISS_AND_NOTIFY);
 		driver = new ChromeDriver(co);
 //		driver.manage().window().setSize(new Dimension(1280, 1024));
