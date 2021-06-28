@@ -1,7 +1,5 @@
 package com.bookmyshow.pages;
 
-
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Iterator;
@@ -11,6 +9,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,55 +19,48 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.bookmyshow.utils.FileIO;
 import com.google.common.base.Function;
 
-
-
 public class HomePage {
-	
+
 	public WebDriver driver;
 	public static Properties prop;
 	public WebDriverWait wait;
-	//initialize the elements of the Page Object or instantiate the Page Objects
-	
-	public HomePage(WebDriver driver){
-		this.driver=driver;	
-		this.wait = new WebDriverWait(driver,15);
-		prop=FileIO.initProperties();
+	// initialize the elements of the Page Object or instantiate the Page Objects
+
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+		this.wait = new WebDriverWait(driver, 15);
+		prop = FileIO.initProperties();
 	}
-	
-	
-	//get url of the current page
+
+	// get url of the current page
 	public String getUrl() {
 		return driver.getCurrentUrl();
 	}
-	//clicking the required location. xpath is taken from the properties file.
-	public void selectArea(String city) throws IOException
-	{
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
-		List <WebElement> cityList = driver.findElements(By.xpath(prop.getProperty("citylist")));
-		for(WebElement w:cityList) {
-			if(w.getText().equalsIgnoreCase(city)) {
+
+	// clicking the required location. xpath is taken from the properties file.
+	public void selectArea(String city) throws IOException {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		List<WebElement> cityList = driver.findElements(By.xpath(prop.getProperty("citylist")));
+		for (WebElement w : cityList) {
+			if (w.getText().equalsIgnoreCase(city)) {
 				w.click();
 				break;
 			}
 		}
-		
-		
-		
-		
+
 	}
-			
-	//clicking "not now" in the popup. xpath is taken from the properties file.
-	public void popup() 
-	{
+
+	// clicking "not now" in the popup. xpath is taken from the properties file.
+	public void popup() {
 		try {
-			FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofSeconds(1)).ignoring(Exception.class);
-	
-			WebElement ele = wait.until(new Function<WebDriver, WebElement>(){
-				public WebElement apply(WebDriver driver)
-				{         
+			FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+					.pollingEvery(Duration.ofSeconds(1)).ignoring(Exception.class);
+
+			WebElement ele = wait.until(new Function<WebDriver, WebElement>() {
+				public WebElement apply(WebDriver driver) {
 					List<WebElement> ele = driver.findElements(By.xpath(prop.getProperty("notnow")));
-					if(ele.size()!=0) {
-						for(WebElement w:ele) {
+					if (ele.size() != 0) {
+						for (WebElement w : ele) {
 							w.click();
 							return w;
 						}
@@ -76,207 +68,177 @@ public class HomePage {
 					return null;
 				}
 			});
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Popup not exist");
 		}
-		
+
 	}
-	
-	//clicking the signin button. xpath is taken from the properties file.
-	public void signinButton() throws IOException
-	{
+
+	// clicking the signin button. xpath is taken from the properties file.
+	public void signinButton() throws IOException {
 		WebElement element = driver.findElement(By.xpath(prop.getProperty("signin")));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		element.click();
 	}
 
-	//clicking the continue-via-google button. xpath is taken from the properties file.
-	public void selectContinueViaGoogle() 
-	{
-		
-		
-		//WebElement element = driver.findElement(By.xpath(prop.getProperty("continueviagoogle")));
-		By by = By.cssSelector("div.sc-eHgmQL:nth-child(2) > div:nth-child(1)");
-		WebDriverWait w = new WebDriverWait(driver, 10);
-		WebElement element = w.until(ExpectedConditions.elementToBeClickable(by));
-		element.click();
-		/*
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		element.click();
-		*/
-		/*
-		JavascriptExecutor js= (JavascriptExecutor) driver;
-		js.executeScript("document.querySelector('div.sc-eHgmQL:nth-child(2) > div:nth-child(1)').click();");
-        */
-		try {
-			/*
-			try {
-				WebDriverWait wait = new WebDriverWait(driver, 5);
-		        wait.until(ExpectedConditions.elementToBeClickable(element));
-		        element.click();
-			}
-			catch(Exception e) {
-				System.out.println("Not clickable");
-			}
-			*/
-			FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30)).pollingEvery(Duration.ofSeconds(1)).ignoring(Exception.class);
+	// clicking the continue-via-google button. xpath is taken from the properties
+	// file.
+	public void selectContinueViaGoogle() {
+		driver.switchTo().activeElement();
+		driver.findElement(By.xpath(prop.getProperty("continueviagoogle"))).click();
+		// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver, 20);
+		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
-			WebElement ele = wait.until(new Function<WebDriver, WebElement>(){
-				public WebElement apply(WebDriver driver)
-				{         
-					Set<String> winId = driver.getWindowHandles();
-					if(winId.size()>1) {
-						System.out.println("Success");
-						return driver.findElement(By.xpath(prop.getProperty("continueviagoogle")));
-					}
-					return null;
-				}
-			});
-		}
-		catch(Exception e) {
-			System.out.println("SigninviaGoogle option is not visible");
-		}
-		
 	}
-	
-	//clicking the continue-via-email button. xpath is taken from the properties file.
-	public void selectContinueViaEmail() throws IOException
-	{
+
+	// clicking the continue-via-email button. xpath is taken from the properties
+	// file.
+	public void selectContinueViaEmail() throws IOException {
 		WebElement element = driver.findElement(By.xpath(prop.getProperty("continueviaemail")));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		element.click();
 	}
 
+	// signing in to bookmyshow
+	public void validsignin(WebDriver driver, String strUserName, String strPassword)
+			throws IOException, InterruptedException {
+		String parentWindow = driver.getWindowHandle();
+		Set<String> windows = driver.getWindowHandles();
+		for (String child : windows) {
+			if (!parentWindow.equalsIgnoreCase(child)) {
+				driver.switchTo().window(child);
+			}
+		}
 
-	//signing in to bookmyshow 
-	public void validsignin(WebDriver driver, String strUserName,String strPassword) throws IOException, InterruptedException{
-	
-		Set<String> ids=driver.getWindowHandles();
-		Iterator<String> itr=ids.iterator();
-		String main=itr.next();
-		String join=itr.next();
-		driver.switchTo().window(join);
-		
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;	
-		
 		this.setUserName(strUserName);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		this.clicknext();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		this.setPassword(strPassword);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		this.clicknext();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		driver.switchTo().window(main);
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+
+		driver.switchTo().window(parentWindow);
+
 	}
 
-	public void invalidsignin(WebDriver driver, String strUserName,String strPassword) throws IOException, InterruptedException{
-		
-		
-		Set<String> ids=driver.getWindowHandles();
-		Iterator<String> itr=ids.iterator();
-		String main=itr.next();
-		String join=itr.next();
-		driver.switchTo().window(join);
-		
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;	
-		
+	public void invalidsignin(WebDriver driver, String strUserName, String strPassword)
+			throws IOException, InterruptedException {
+
+		String parentWindow = driver.getWindowHandle();
+		Set<String> windows = driver.getWindowHandles();
+		for (String child : windows) {
+			if (!parentWindow.equalsIgnoreCase(child)) {
+				driver.switchTo().window(child);
+			}
+		}
+
 		this.setUserName(strUserName);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		this.clicknext();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		this.setPassword(strPassword);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		this.clicknext();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		
-		
+
 		WebElement element = driver.findElement(By.xpath(prop.getProperty("errorpassword")));
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
 		String errormessage = element.getText();
-		
+		System.out.println("********************************************************************");
 		System.out.println(errormessage);
 		System.out.println("********************************************************************");
-		
+
 		driver.close();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.switchTo().window(main);
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
-		
+
+		driver.switchTo().window(parentWindow);
 
 	}
 
-	public void invalidUserName(WebDriver driver, String strUserName,String strPassword) throws IOException, InterruptedException{
-		
-		
-		Set<String> ids=driver.getWindowHandles();
-		Iterator<String> itr=ids.iterator();
-		String main=itr.next();
-		String join=itr.next();
-		driver.switchTo().window(join);
-		
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;	
-		
+	public void invalidUserName(WebDriver driver, String strUserName, String strPassword)
+			throws IOException, InterruptedException {
+
+		String parentWindow = driver.getWindowHandle();
+		Set<String> windows = driver.getWindowHandles();
+		for (String child : windows) {
+			if (!parentWindow.equalsIgnoreCase(child)) {
+				driver.switchTo().window(child);
+			}
+		}
+
 		this.setUserName(strUserName);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
+
 		this.clicknext();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		this.setPassword(strPassword);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		this.clicknext();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		
+
 		WebElement element = driver.findElement(By.xpath(prop.getProperty("errorusername")));
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
 		String errormessage = element.getText();
-		
+
+		System.out.println("********************************************************************");
 		System.out.println(errormessage);
 		System.out.println("********************************************************************");
-		
+
 		driver.close();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.switchTo().window(main);
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
-	
-		
+
+		driver.switchTo().window(parentWindow);
+
 	}
 
-	//entering the username using sendkeys. xpath is taken from the properties file.
-	public void setUserName(String strUserName) throws IOException{
+	public void blankPassword(WebDriver driver, String strUserName, String strPassword)
+			throws IOException, InterruptedException {
+
+		String parentWindow = driver.getWindowHandle();
+		Set<String> windows = driver.getWindowHandles();
+		for (String child : windows) {
+			if (!parentWindow.equalsIgnoreCase(child)) {
+				driver.switchTo().window(child);
+			}
+		}
+
+		this.setUserName(strUserName);
+
+		this.clicknext();
+		this.setPassword(strPassword);
+		this.clicknext();
+		
+		WebElement element = driver.findElement(By.xpath(prop.getProperty("errorblankpassword")));
+
+		String errormessage = element.getText();
+
+		System.out.println("********************************************************************");
+		System.out.println(errormessage);
+		System.out.println("********************************************************************");
+
+		driver.close();
+
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	// entering the username using sendkeys. xpath is taken from the properties
+	// file.
+	public void setUserName(String strUserName) throws IOException {
 		WebElement emailid = driver.findElement(By.xpath(prop.getProperty("emailid")));
 		emailid.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		emailid.clear();
 		emailid.sendKeys(strUserName);
 	}
 
-	//clicking next after entering the username. xpath is taken from the properties file.
-	public void clicknext() throws IOException{
-		WebElement element = driver.findElement(By.xpath(prop.getProperty("next")));
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		element.click();
+	// clicking next after entering the username. xpath is taken from the properties
+	// file.
+	public void clicknext() throws IOException {
+		driver.findElement(By.xpath(prop.getProperty("next"))).click();
+		wait = new WebDriverWait(driver, 20);
 	}
-	
-	//entering the password using sendkeys. xpath is taken from the properties file.
+
+	// entering the password using sendkeys. xpath is taken from the properties
+	// file.
 	public void setPassword(String strPassword) throws IOException {
-		
+
 		WebElement password = driver.findElement(By.xpath(prop.getProperty("passwordenter")));
 		password.click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		password.clear();
 		password.sendKeys(strPassword);
 	}

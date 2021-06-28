@@ -29,16 +29,17 @@ public class SigninWindowTests {
 		objHomePage.popup();
 		objHomePage.selectArea("Chennai");
 		objHomePage.signinButton();
-		objHomePage.selectContinueViaGoogle();
+		
 	}
 	
 	
-	@Test(groups="Smoke")
+	@Test(priority=0,groups="Smoke")
 	public void Test_Invalid_UserName() throws IOException, InterruptedException, Exception
 	{
 		
 		try {
 			
+			objHomePage.selectContinueViaGoogle();
 			//getting the username and password from excel and passing as parameters to signin() method in HomePage
 			objHomePage.invalidUserName(driver, "abc@123","Hi");
 			
@@ -50,16 +51,16 @@ public class SigninWindowTests {
 	}
 	
 	
-	@Test(groups="Smoke")
+	@Test(priority=1,groups="Smoke")
 	public void Test_Invalid_Password() throws IOException, InterruptedException, Exception
 	{
 		
 		
 		try {
 			
-			
+			objHomePage.selectContinueViaGoogle();
 			//getting the username and password from excel and passing as parameters to signin() method in HomePage
-			objHomePage.invalidsignin(driver, "dummyemail@gmail.com","hi");
+			objHomePage.invalidsignin(driver, "hackTestCog@gmail.com","hi");
 			
 			
 		}
@@ -68,13 +69,13 @@ public class SigninWindowTests {
 		}
 	}
 	
-	@Test(groups="Smoke")
+	@Test(priority=2 ,groups="Smoke")
 	public void Test_Blank_UserName() throws IOException, InterruptedException, Exception
 	{
 		
 		try {
 			
-			
+			objHomePage.selectContinueViaGoogle();
 			//getting the username and password from excel and passing as parameters to signin() method in HomePage
 			objHomePage.invalidUserName(driver, " ","hi");
 			
@@ -84,29 +85,29 @@ public class SigninWindowTests {
 		}
 	}
 	
-	@Test(groups="Smoke")
+	@Test(priority=3,groups="Smoke")
 	public void Test_Blank_Password() throws IOException, InterruptedException, Exception
 	{	
 		
 		
-			
+		objHomePage.selectContinueViaGoogle();
 		//getting the username and password from excel and passing as parameters to signin() method in HomePage
-		objHomePage.invalidsignin(driver, "dummyemail@gmail.com"," ");
+		objHomePage.blankPassword(driver, "hackTestCog@gmail.com","");
 			
 		
 		
 	}
 	
-	@Test(groups="Smoke")
+	@Test(priority=4,groups="Smoke")
 	public void Test_Signing_In_Appears_Correctly() throws IOException, InterruptedException, Exception
 	{
 		
 		
 		try {
 			
-			
+			objHomePage.selectContinueViaGoogle();
 			//getting the username and password from excel and passing as parameters to signin() method in HomePage
-			objHomePage.validsignin(driver, "dummyemail@gmail.com","correctpassword");
+			objHomePage.validsignin(driver, "hackTestCog@gmail.com","test8765!");
 			
 		}
 		catch(IOException e) {
