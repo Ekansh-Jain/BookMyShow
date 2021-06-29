@@ -50,7 +50,7 @@ public class FileIO {
 			String testName) throws IOException {
 		
 		//Creating hashmap to store data
-		HashMap<String, ArrayList<String>> data = new HashMap<>();
+		HashMap<String, ArrayList<String>> data = new HashMap<String, ArrayList<String>>();
 		
 		//Reading the excel sheet
 		read_file = new FileInputStream(System.getProperty("user.dir")
@@ -60,7 +60,7 @@ public class FileIO {
 		
 		// Iterating over all cells in the sheet
 		Iterator<Row> rowIterator;
-		ArrayList<String> rowData = new ArrayList<>();
+		ArrayList<String> rowData = new ArrayList<String>();
 		rowIterator = worksheet.iterator();
 		int rowNum = 1;//"1": {..}
 		if (rowIterator.hasNext())
@@ -73,7 +73,7 @@ public class FileIO {
 			}
 			
 			//Writing cell data to hashmap based on cell data type
-			rowData = new ArrayList<>();
+			rowData = new ArrayList<String>();
 			while (cellIterator.hasNext()) {
 				Cell cell = cellIterator.next();
 				CellType type = cell.getCellTypeEnum();

@@ -87,7 +87,7 @@ public class HomePage {
 		driver.switchTo().activeElement();
 		driver.findElement(By.xpath(prop.getProperty("continueviagoogle"))).click();
 		// driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
 	}

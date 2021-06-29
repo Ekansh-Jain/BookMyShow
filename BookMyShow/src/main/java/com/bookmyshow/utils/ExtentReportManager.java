@@ -11,6 +11,7 @@ public class ExtentReportManager extends BaseUI {
 
 	/************** Getting report instance for Extent Report ****************/
 	public static ExtentReports getReportInstance() {
+		
 		String repName = "TestReport-"+BaseUI.timestamp+".html";
 		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")
 				+ "/TestOutput/" + repName);

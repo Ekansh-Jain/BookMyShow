@@ -7,13 +7,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.bookmyshow.base.BaseUI;
 import com.bookmyshow.pages.HomePage;
 import com.bookmyshow.pages.MoviesPage;
 import com.bookmyshow.pages.SportsPage;
-
+@Listeners(com.bookmyshow.utils.ListenerUtils.class)
 public class MoviesPageTests {
 	
 	ActualValues objmainpage;
@@ -45,7 +46,8 @@ public class MoviesPageTests {
 	@Test(groups="Smoke")
 	public void Test_Window_Navigates_To_Movie_Page() throws IOException, Exception, InterruptedException
 	{
-		Assert.assertTrue(driver.getTitle().contains("movies"));		
+		
+		Assert.assertTrue(driver.getTitle().contains("Movie"));	
 	}
 	
 	@Test(groups="Regression")

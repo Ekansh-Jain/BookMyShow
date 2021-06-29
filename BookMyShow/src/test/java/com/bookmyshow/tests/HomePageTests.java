@@ -6,14 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
 import com.bookmyshow.base.BaseUI;
 import com.bookmyshow.pages.HomePage;
 
-
-
+@Listeners(com.bookmyshow.utils.ListenerUtils.class)
 public class HomePageTests {
 	
 	ActualValues objmainpage;

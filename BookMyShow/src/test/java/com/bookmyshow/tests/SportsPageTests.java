@@ -7,12 +7,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.bookmyshow.base.BaseUI;
 import com.bookmyshow.pages.HomePage;
 import com.bookmyshow.pages.SportsPage;
-
+@Listeners(com.bookmyshow.utils.ListenerUtils.class)
 public class SportsPageTests {
 	ActualValues objmainpage;
 	HomePage objHomePage;
@@ -23,7 +24,7 @@ public class SportsPageTests {
 	@BeforeClass
 	public void prints() {
 		System.out.println("********************************************************************");
-		System.out.println("TESTS FOR MOVIES PAGE");
+		System.out.println("TESTS FOR SPORTS PAGE");
 		System.out.println("********************************************************************");
 	}
 	
