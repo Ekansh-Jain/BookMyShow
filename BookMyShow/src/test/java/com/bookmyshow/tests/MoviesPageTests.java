@@ -17,7 +17,6 @@ import com.bookmyshow.pages.SportsPage;
 @Listeners(com.bookmyshow.utils.ListenerUtils.class)
 public class MoviesPageTests {
 	
-	ActualValues objmainpage;
 	HomePage objHomePage;
 	SportsPage objSportsPage;
 	MoviesPage objMoviesPage;

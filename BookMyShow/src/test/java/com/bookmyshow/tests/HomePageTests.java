@@ -16,7 +16,7 @@ import com.bookmyshow.pages.HomePage;
 @Listeners(com.bookmyshow.utils.ListenerUtils.class)
 public class HomePageTests {
 	
-	ActualValues objmainpage;
+	//ActualValues objmainpage;
 	HomePage objHomePage;
 	//driver initialization
 	public static WebDriver driver;
@@ -45,15 +45,12 @@ public class HomePageTests {
 		//check the expected page title with actual page title using assert
 		
 		
-		this.objmainpage = new ActualValues(driver);
+		
 		
 		//storing the title in a string
-		String pagetitle = objmainpage.getPageTitle();
-		
-	
-			
-		//comparing the actual value with the expected value
-		Assert.assertTrue(pagetitle.contains(pagetitle));
+		String pagetitle =driver.getTitle();
+		if(pagetitle.contains("Book"))
+			System.out.println(pagetitle);
 	}
 	
 	@Test(dependsOnMethods="Test_MainPage_Title_Matches_Correctly",groups="Smoke")
@@ -131,7 +128,7 @@ public class HomePageTests {
 	
 	@AfterTest
 	public void close() {
-		driver.close();
+		driver.quit();
 	}
 		
 }

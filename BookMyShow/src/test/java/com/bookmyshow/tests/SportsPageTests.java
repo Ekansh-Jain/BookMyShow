@@ -15,7 +15,7 @@ import com.bookmyshow.pages.HomePage;
 import com.bookmyshow.pages.SportsPage;
 @Listeners(com.bookmyshow.utils.ListenerUtils.class)
 public class SportsPageTests {
-	ActualValues objmainpage;
+	
 	HomePage objHomePage;
 	SportsPage objSportsPage;
 	//driver initialization
