@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Regression">
+  <test thread-count="5" name="RegressionTest">
+    <classes>
+      <class name="com.bookmyshow.tests.SportsPageTests"/>
+      <class name="com.bookmyshow.tests.SigninWindowTests"/>
+      <class name="com.bookmyshow.tests.HomePageTests"/>
+      <class name="com.bookmyshow.tests.MoviesPageTests"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
