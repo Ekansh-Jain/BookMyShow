@@ -5,7 +5,7 @@
     <classes>
       <class name="com.bookmyshow.tests.SigninWindowTests">
         <methods>
-          <include name="Test_Invalid_UserName" invocation-numbers="0"/>
+          <include name="Test_Signing_In_Appears_Correctly" invocation-numbers="0"/>
           <include name="setup"/>
           <include name="close"/>
         </methods>
