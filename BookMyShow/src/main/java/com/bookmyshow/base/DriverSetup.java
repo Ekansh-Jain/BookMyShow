@@ -21,16 +21,13 @@ public class DriverSetup {
 		System.setProperty("webdriver.chrome.driver", userDir
 				+ BaseUI.prop.getProperty("chromeDriver"));
 		ChromeOptions co = new ChromeOptions();
-		co.addArguments("--disable-web-security","allow-running-insecure-content");
 		
 		co.addArguments("--disable-infobars");
-		//co.addArguments("--disable-notifications");
 		co.addArguments("--disable-gpu");
 		 co.addArguments("--disable-web-security");
         co.addArguments("--allow-running-insecure-content");
 		co.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.DISMISS_AND_NOTIFY);
 		driver = new ChromeDriver(co);
-//		driver.manage().window().setSize(new Dimension(1280, 1024));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(180, TimeUnit.SECONDS);
 		return driver;
@@ -43,10 +40,8 @@ public class DriverSetup {
 				+ BaseUI.prop.getProperty("firefoxDriver"));
 		FirefoxOptions fo = new FirefoxOptions();
 		fo.addArguments("--disable-infobars");
-		//fo.addArguments("--disable-notifications");
 		fo.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.DISMISS_AND_NOTIFY);
 		driver = new FirefoxDriver(fo);
-//		driver.manage().window().setSize(new Dimension(1280, 1024));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(180, TimeUnit.SECONDS);
 		return driver;
@@ -60,7 +55,6 @@ public class DriverSetup {
 		System.setProperty("webdriver.edge.driver", userDir
 				+ BaseUI.prop.getProperty("msedgeDriver"));
 		driver = new EdgeDriver();
-//		driver.manage().window().setSize(new Dimension(1280, 1024));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(180, TimeUnit.SECONDS);
 		return driver;

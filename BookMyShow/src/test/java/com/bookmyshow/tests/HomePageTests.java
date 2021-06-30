@@ -16,7 +16,7 @@ import com.bookmyshow.pages.HomePage;
 @Listeners(com.bookmyshow.utils.ListenerUtils.class)
 public class HomePageTests {
 	
-	//ActualValues objmainpage;
+	
 	HomePage objHomePage;
 	//driver initialization
 	public static WebDriver driver;
